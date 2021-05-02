@@ -1,7 +1,13 @@
 function currentWeather(response) {
-  let temperature = Math.round(response.data.main.temp);
+  let showCity = document.querySelector("#current-city");
+  showCity.innerHTML = response.data.name;
+
   let temp = document.querySelector("#temperature");
+  let temperature = Math.round(response.data.main.temp);
   temp.innerHTML = `${temperature}º `;
+
+  let description = document.querySelector("#description");
+  description.innerHTML = response.data.weather[0].description;
 
   let humidity = document.querySelector("#humidity");
   humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
@@ -9,15 +15,12 @@ function currentWeather(response) {
   let wind = Math.round(response.data.wind.speed);
   let windSpeed = document.querySelector("#wind");
   windSpeed.innerHTML = `Wind speed: ${wind}km/hr`;
-  console.log(response.data);
 }
 
 function searchCity(event) {
   event.preventDefault();
   let currentCity = document.querySelector("#search-city");
-  let showCity = document.querySelector("#current-city");
   let city = currentCity.value;
-  showCity.innerHTML = `${currentCity.value}`;
 
   let apiKey = "0bd923d5cac86a139a92eda79ce74580";
 

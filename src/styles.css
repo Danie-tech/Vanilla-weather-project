@@ -15,6 +15,10 @@ li {
   font-size: 20px;
 }
 
+li ::first-letter {
+  text-transform: capitalize;
+}
+
 .container {
   font-family: "Raleway", sans-serif;
   margin: 40px auto;

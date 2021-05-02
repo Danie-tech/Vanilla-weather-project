@@ -17,9 +17,10 @@ li {
 
 .container {
   font-family: "Raleway", sans-serif;
-  margin: 50px auto;
+  margin: 40px auto;
   background: rgba(255, 255, 255, 0.4);
-  border-radius: 6px;
+  border-radius: 8px;
+  color: #45181e;
 }
 
 .temperature {
@@ -28,6 +29,7 @@ li {
 
 .coder a {
   text-decoration: none;
+  color: #9f1e49;
 }
 
 .coder {

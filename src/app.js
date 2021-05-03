@@ -70,13 +70,13 @@ function showFahrenheitTemp(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
   let FahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(FahrenheitTemperature);
+  temperatureElement.innerHTML = `${Math.round(FahrenheitTemperature)}º`;
 }
 
 function showCelsiusTemp(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}º`;
 }
 
 let celsiusTemperature = null;

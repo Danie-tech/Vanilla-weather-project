@@ -36,6 +36,12 @@ li {
   font-size: 20px;
 }
 
+.units a {
+  text-decoration: none;
+  color: #45181e;
+  cursor: default;
+}
+
 .coder a {
   text-decoration: none;
   color: #9f1e49;

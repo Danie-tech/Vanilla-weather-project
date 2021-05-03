@@ -11,7 +11,6 @@ input {
 }
 
 h1,
-h2,
 h3 {
   text-transform: capitalize;
 }
@@ -30,7 +29,11 @@ li {
 }
 
 .temperature {
-  font-size: 40px;
+  font-size: 45px;
+}
+
+.units {
+  font-size: 20px;
 }
 
 .coder a {
@@ -41,4 +44,5 @@ li {
 .coder {
   text-align: center;
   font-size: 12px;
+  margin-top: 20px;
 }

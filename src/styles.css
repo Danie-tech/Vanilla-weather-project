@@ -42,6 +42,29 @@ li {
   cursor: default;
 }
 
+.forecast {
+  font-size: 25px;
+  margin-top: 25px;
+}
+
+.weather-forecast {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.forecast-date,
+.forecast-temp-max {
+  font-size: large;
+}
+
+.forecast-temp {
+  line-height: 23px;
+}
+
+.forecast-temp-max {
+  color: #1f070a;
+}
+
 .coder a {
   text-decoration: none;
   color: #9f1e49;

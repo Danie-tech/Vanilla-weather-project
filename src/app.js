@@ -22,6 +22,15 @@ function formatDate(timestamp) {
   return `${day} ${hours}: ${minutes}`;
 }
 
+function getForecast(coordinates) {
+  console.log(coordinates);
+
+  let apiKey = "0bd923d5cac86a139a92eda79ce74580";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&&units=metric&appid=${apiKey}`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function currentWeather(response) {
   let showCity = document.querySelector("#current-city");
   showCity.innerHTML = response.data.name;
@@ -49,6 +58,8 @@ function currentWeather(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+
+  getForecast(response.data.coord);
 }
 
 function searchCity(event) {
@@ -57,7 +68,6 @@ function searchCity(event) {
   let city = currentCity.value;
 
   let apiKey = "0bd923d5cac86a139a92eda79ce74580";
-
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
   axios.get(apiUrl).then(currentWeather);
@@ -65,6 +75,36 @@ function searchCity(event) {
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", searchCity);
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#weather-forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      ` 
+            <div class="col-sm-2">
+              <div class="forecast-date">${day}</div>
+              <img
+                src="src/images/sun.png"
+                alt="Sunny"
+                width="30px"
+                id="icon"
+              />
+              <div class="forecast-temp">
+                <span class="forecast-temp-max">29º</span>| 18º
+              </div>
+            </div>
+          `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();
 
 function showFahrenheitTemp(event) {
   event.preventDefault();
@@ -86,35 +126,3 @@ fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 
 let celsiusLink = document.querySelector("#celsius");
 celsiusLink.addEventListener("click", showCelsiusTemp);
-
-function displayForecast() {
-  let forecastElement = document.querySelector("#weather-forecast");
-
-  let forecastHTML = `<div class="row">`;
-
-  let days = ["Thu", "Fri", "Sat"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      ` 
-            <div class="col-sm-2">
-              <div class="forecast-date">${day}</div>
-              <img
-                src="src/images/sun.png"
-                alt="Sunny"
-                width="30px"
-                id="icon"
-              />
-              <div class="forecast-temp">
-                <span class="forecast-temp-max">29º</span>| 18º
-              </div>
-            </div>
-          `;
-  });
-
-  forecastHTML = forecastHTML + `</div>`;
-
-  forecastElement.innerHTML = forecastHTML;
-}
-
-displayForecast();

@@ -86,3 +86,35 @@ fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 
 let celsiusLink = document.querySelector("#celsius");
 celsiusLink.addEventListener("click", showCelsiusTemp);
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#weather-forecast");
+
+  let forecastHTML = `<div class="row">`;
+
+  let days = ["Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      ` 
+            <div class="col-sm-2">
+              <div class="forecast-date">${day}</div>
+              <img
+                src="src/images/sun.png"
+                alt="Sunny"
+                width="30px"
+                id="icon"
+              />
+              <div class="forecast-temp">
+                <span class="forecast-temp-max">29º</span>| 18º
+              </div>
+            </div>
+          `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();

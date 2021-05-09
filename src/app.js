@@ -19,7 +19,52 @@ function formatDate(timestamp) {
     minutes = `0${minutes}`;
   }
 
-  return `${day} ${hours}: ${minutes}`;
+  return `${day} ${hours}:${minutes}`;
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let day = days[date.getDay()];
+
+  return day;
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#weather-forecast");
+
+  let forecastHTML = `<div class="row">`;
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        ` <div class="col-sm-2">
+              <div class="forecast-date">${formatDay(
+                forecastDay.dt * 1000
+              )}</div> 
+              <img
+                src="http://openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }@2x.png"
+                alt=""
+             width="30px"
+                id="icon"
+              />
+              <div class="forecast-temp">
+                <span class="forecast-temp-max">${Math.round(
+                  forecastDay.temp.max
+                )}º</span>| ${Math.round(forecastDay.temp.min)}º
+              </div>
+            </div>
+          `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
@@ -75,36 +120,6 @@ function searchCity(event) {
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", searchCity);
-
-function displayForecast() {
-  let forecastElement = document.querySelector("#weather-forecast");
-
-  let forecastHTML = `<div class="row">`;
-  let days = ["Thu", "Fri", "Sat"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      ` 
-            <div class="col-sm-2">
-              <div class="forecast-date">${day}</div>
-              <img
-                src="src/images/sun.png"
-                alt="Sunny"
-                width="30px"
-                id="icon"
-              />
-              <div class="forecast-temp">
-                <span class="forecast-temp-max">29º</span>| 18º
-              </div>
-            </div>
-          `;
-  });
-  forecastHTML = forecastHTML + `</div>`;
-
-  forecastElement.innerHTML = forecastHTML;
-}
-
-displayForecast();
 
 function showFahrenheitTemp(event) {
   event.preventDefault();
